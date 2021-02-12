@@ -9,7 +9,8 @@ const learning = JSON.parse(fs.readFileSync(`${__dirname}/data/learning.json`));
 app.get('/', (req, res) => {
     res.status(200).json({message:'Mpilz connected'})
 });
-app.get('/api/v1/summary', (req, res) => {
+
+const getSummary = (req, res) => {
     res.status(200).json({
         status: 'success',
         results: summary.length,
@@ -17,9 +18,9 @@ app.get('/api/v1/summary', (req, res) => {
            summary 
         }
     })
-});
+}
 
-app.post('/api/v1/learning', (req, res) => {
+const createLearning = (req, res) => {
     console.log(req.body);
 
     const newId = learning[learning.length - 1].id + 1;
@@ -33,7 +34,14 @@ app.post('/api/v1/learning', (req, res) => {
             }
         })
     })
-})
+}
+
+// app.get('/api/v1/summary', getSummary);
+// app.post('/api/v1/learning', createLearning);
+
+app.route('/api/v1/summary').get(getSummary);
+app.route('/api/v1/learning').post(createLearning);
+
 const port = 3000;
 app.listen(port, () => {
     console.log(`App running on port ${port}...`);
