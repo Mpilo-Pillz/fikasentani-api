@@ -13,8 +13,13 @@ exports.getSummary = (req, res) => {
 }
 
 exports.getTotalYearsOfExperience = (req, res) => {
+    const thisYear = new Date().getFullYear()
+    const yearsOfExperience = {
+        testEngineering: thisYear - 2013,
+        developer: thisYear - 2018
+    }
     res.status(200).json({
         status: 'success',
-        yearsOfExperience: new Date().getFullYear() - 2013
+        yearsOfExperience: yearsOfExperience
     })
 }
