@@ -1,8 +1,9 @@
 const express = require('express');
-const summaryController = require('./../controllers/summaryController');
+const { getSummary, getTotalYearsOfExperience } = require('./../controllers/summaryController');
 
 const router = express.Router()
 
-router.route('/').get(summaryController.getSummary);
+router.route('/').get(getSummary);
+router.route('/yearsOfExperience').get(getTotalYearsOfExperience);
 
 module.exports = router;
