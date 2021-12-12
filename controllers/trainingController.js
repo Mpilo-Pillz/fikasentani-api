@@ -18,11 +18,13 @@ const createUdemyCourse = async (req, res, next) => {
     });
     const result = await newCompletedCourse.save();  
 
-    res.json(result);
+    res.status(201).json(result);
 }
 
-exports.getAllTrainings = async (req, res, next) => {
-   console.log("TODO add get logic");
+const getAllTrainings = async (req, res, next) => {
+   const trainings = await Training.find().exec();
+   res.status(200).json(trainings);
 }
 
 exports.createUdemyCourse = createUdemyCourse;
+exports.getAllTrainings = getAllTrainings;
