@@ -10,5 +10,13 @@ const getSummary = async (req, res, next) => {
 
 }
 
+const createExperienceYearStart = async (req, res, next) => {
+    const yearStarted = {
+        testEngineering: 2013,
+        developer: 2018
+    }
+}
+
+
 exports.createSummary = createSummary;
 exports.getSummary = getSummary;
