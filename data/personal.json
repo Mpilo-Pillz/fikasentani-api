@@ -2,5 +2,9 @@
     {
         "title": "Personal Summary",
         "description": "I am a self-taught Software Engineer. I have over 7 years of professional experience"
+    },
+    {
+        "title": "Primary Programming Language",
+        "description": "TypeScript"
     }
 ]
