@@ -1,9 +1,13 @@
 require('dotenv').config();
-const MongoClient = require('mongodb').MongoClient
-const url = process.env.DB_URL;
+const mongoose = require('mongoose');
+const Training = require('../models/training');
+mongoose.connect(process.env.DB_URL)
+.then(() => console.log("Connection to Mongo successful"))
+.catch(() => console.log("Connection to Mongo failed"));
 
-exports.createUdemyCourse = async (req, res, next) => {
-    const newCompletedCourse = {
+
+const createUdemyCourse = async (req, res, next) => {
+    const newCompletedCourse = new Training({
         name: req.body.name,
         img: req.body.img,
         provider: req.body.provider,
@@ -11,34 +15,14 @@ exports.createUdemyCourse = async (req, res, next) => {
         instructor: req.body.instructor,
         instructorprofile: req.body.instructorprofile,
         courselink: req.body.courselink,
-    }
-    const client = new MongoClient(url);
-    try {
-        
-        await client.connect();
-        const db = client.db();
-        const result = db.collection('trainings').insertOne(newCompletedCourse);
+    });
+    const result = await newCompletedCourse.save();  
 
-    } catch (error) {
-        return res.json({message: 'Error occured trying to store data'})
-    };
-    client.close();
-
-    res.json(newCompletedCourse)
+    res.json(result);
 }
 
 exports.getAllTrainings = async (req, res, next) => {
-    const client = new MongoClient(url);
-    let trainings;
-    try {
-        await client.connect();
-        const db = client.db();
-        const trainings = await db.collection('trainings').find().toArray();
-;    }
-    catch (error) {
-        return res.json({message: "Could not retrieve trainings"})
-    }
-    client.close();
-
-    res.json(trainings)
+   console.log("TODO add get logic");
 }
+
+exports.createUdemyCourse = createUdemyCourse;
