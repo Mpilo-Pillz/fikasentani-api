@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
-const Tool = require("../models/Tool");
+const Tool = require("../models/tools");
 mongoose
   .connect(process.env.DB_URL)
   .then(() => console.log("Connection to Mongo successful"))
@@ -19,8 +19,8 @@ const createTool = async (req, res) => {
 };
 
 const getAllTools = async (req, res) => {
-  const trainings = await Training.find().exec();
-  res.status(200).json(trainings);
+  const tools = await Tool.find().exec();
+  res.status(200).json(tools);
 };
 
 exports.createTool = createTool;
