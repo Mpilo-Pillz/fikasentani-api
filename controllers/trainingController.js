@@ -1,9 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const Training = require('../models/training');
-mongoose.connect(process.env.DB_URL)
-.then(() => console.log("Connection to Mongo successful"))
-.catch(() => console.log("Connection to Mongo failed"));
+
 
 
 const createUdemyCourse = async (req, res, next) => {
