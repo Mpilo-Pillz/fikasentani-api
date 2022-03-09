@@ -1,9 +1,15 @@
 const express = require("express");
 
+const mongoose = require("mongoose");
+
 const summaryRouter = require("./routes/summaryRoutes");
 const learningRouter = require("./routes/learningRoutes");
 const trainingRouter = require("./routes/trainingRoutes");
 const toolsRouter = require("./routes/toolsRoutes");
+
+mongoose.connect(process.env.DB_URL)
+.then(() => console.log("Connection to Mongo successful"))
+.catch(() => console.log("Connection to Mongo failed"));
 
 const app = express();
 app.use(express.json());
