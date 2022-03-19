@@ -1,4 +1,5 @@
 const express = require("express");
+var cors = require('cors')
 
 const mongoose = require("mongoose");
 
@@ -12,6 +13,8 @@ mongoose.connect(process.env.DB_URL)
 .catch(() => console.log("Connection to Mongo failed"));
 
 const app = express();
+app.use(cors())
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
