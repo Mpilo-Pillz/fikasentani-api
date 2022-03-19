@@ -1,11 +1,7 @@
-require("dotenv").config();
 
-const mongoose = require("mongoose");
+
+
 const Tool = require("../models/tools");
-mongoose
-  .connect(process.env.DB_URL)
-  .then(() => console.log("Connection to Mongo successful"))
-  .catch(() => console.log("Connection to Mongo failed"));
 
 const createTool = async (req, res) => {
   const newTool = new Tool({
@@ -23,5 +19,12 @@ const getAllTools = async (req, res) => {
   res.status(200).json(tools);
 };
 
+const updateTool = async (req, res) => {
+  const { id } = req.params;
+  const tool = await Tool.findByIdAndUpdate(id, req.body, { runValidators: true, new: true});
+  res.status(200).json(tool)
+}
+
 exports.createTool = createTool;
 exports.getAllTools = getAllTools;
+exports.updateTool = updateTool;
